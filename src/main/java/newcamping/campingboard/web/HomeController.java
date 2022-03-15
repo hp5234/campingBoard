@@ -20,8 +20,6 @@ public class HomeController {
             2. 로그인 여부
             3.
          */
-
-
         return "home";
     }
 }
