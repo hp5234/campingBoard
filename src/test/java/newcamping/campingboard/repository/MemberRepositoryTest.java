@@ -29,15 +29,8 @@ public class MemberRepositoryTest {
         member.setName("전진우");
         member.setEmail("hp5234@naver.com");
 
-        Member memberJinju = new Member();
-        memberJinju.setLoginId("jinju123");
-        memberJinju.setName("킴진주 내사랑");
-        memberJinju.setPassword("123123");
-        memberJinju.setEmail("jinju@naver.com");
-
 
         // when
-        Long jinjuId = memberRepository.save(memberJinju);
 
         Long savedId = memberRepository.save(member);
         Member findedMember = memberRepository.findById(savedId);
