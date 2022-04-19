@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+h1 {
+    font-family: 'Comfortaa', cursive;
+    color: #000069;
+}
+
+#map{
+    display: inline-block;
+    width:500px;
+    height:500px;
+}
+.main-space{
+    text-align:center;
+}
+
+.board-space{
+    overflow:auto;
+    display: inline-block;
+    background-color: #D2D2FF;
+    width:500px;
+    height:500px;
+}
+
+.login-form{
+    width: 40%;
+    display: inline-block;
+    text-align:center;
+}
+.add-member-form{
+    margin-left: 5%;
+    width: 60%;
+}
+.add-board-form{
+    display: inline-block;
+    margin-left: 5%;
+    width: 70%;
+    height: 100%;
+}

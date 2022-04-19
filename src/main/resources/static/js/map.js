@@ -5,9 +5,10 @@ function mapMaker() {
     let places = ""; ///!*[[${places}]]*!/
     let container = document.getElementById('map');
     let options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
+        center: new kakao.maps.LatLng(36.350511, 127.384834),
+        level: 5
     };
+    console.log("지도 생성 성공 ")
     let map = new kakao.maps.Map(container, options); // 지도 생성
 
     // 지도에 마커 표기
