@@ -7,7 +7,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class Comment {
+public class CommentDTO {
+
+    /**
+     * 댓글 DTO
+     */
 
     private Long id;
 

@@ -1,10 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>add Member Form</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+            href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/mycss.css}"
+            href="css/mycss.css" rel="stylesheet">
 </head>
 <body>
+    <div class="bg-light">
+        <br>
+        <br>
+        <div class="add-memberDTO-form">
+            <h1>Sign Up Page</h1><br><br>
+            <form >
+                <div class="col-md-4">
+                    <label for="validationServer01" class="form-label">User Id</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" value="User Id" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-4">
+                    <label for="validationServer02" class="form-label">Password</label>
+                    <input type="text" class="form-control is-valid" id="validationServer02" value="Password" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-4">
+                    <label for="validationServerUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3" required>
+                        <div class="invalid-feedback">
+                            Please input your username.
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-6">
+                    <label for="validationServer03" class="form-label">Email</label>
+                    <input type="email" class="form-control is-invalid" id="validationServer03" required>
+                    <div class="invalid-feedback">
+                        Please input your Email
+                    </div>
+                </div>
+                <br>
 
+
+                
+                <div class="col-md-3">
+                    <label for="validationServer04" class="form-label">State</label>
+                    <select class="form-select is-invalid" id="validationServer04" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid state.
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-3">
+                    <label for="validationServer05" class="form-label">Zip</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer05" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
+                    </div>
+                </div>
+                <br>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                        <label class="form-check-label" for="invalidCheck3">
+                            Agree to terms and conditions
+                        </label>
+                        <div class="invalid-feedback">
+                            You must agree before submitting.
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+                <br>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
 </body>
-</html>

@@ -6,11 +6,19 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter @Setter
-public class Board {
+public class BoardDTO {
+
+    /**
+     * 게시판 DTO
+     */
+
     private Long id;
 
     // 생성 시간
-    private LocalDateTime createdTime;
+    private LocalDateTime createTime;
+
+    // 최종 수정 시간
+    private LocalDateTime updateTime;
 
     // 위도
     private String latitude;

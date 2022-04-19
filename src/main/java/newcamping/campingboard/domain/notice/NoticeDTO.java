@@ -7,15 +7,22 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class Notice {
+public class NoticeDTO {
+
+    /**
+     * 게시물 DTO
+     */
 
     private Long id;
 
     // 생성 시간
-    private LocalDateTime createdTime;
+    private LocalDateTime createTime;
 
     // 최종 수정 시간
-    private LocalDateTime updatedTime;
+    private LocalDateTime updateTime;
+
+    // 게시판 id
+    private Long boardId;
 
     // 생성자_id
     private Long ownerId;
@@ -37,8 +44,6 @@ public class Notice {
 
     // 싫어요
     private Long unlikeCount;
-
-
 }
 
 

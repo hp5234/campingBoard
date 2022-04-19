@@ -2,34 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>add Board Form</title>
+    <title>add Notice Form</title>
     <link th:href="@{/css/bootstrap.min.css}"
           href="css/bootstrap.min.css" rel="stylesheet">
     <link th:href="@{/css/mycss.css}"
           href="css/mycss.css" rel="stylesheet">
 </head>
 <body>
-<div class="bg-light" style="height: 100%">
+<div class="bg-light">
     <br>
     <br>
     <div class="add-board-form">
-        <h1>add Board Page</h1><br><br>
+        <h1>add Notice Page</h1><br><br>
         <form >
             <!-- 제목 -->
             <div class="input-group">
                 <span class="input-group-text">Title</span>
-                <input type="text" class="form-control" aria-label="With textarea" style="height: 40px;"/>
+                <textarea class="form-control" aria-label="With textarea" style="height: 40px;"></textarea>
             </div><br>
 
             <!-- 내용 -->
             <div class="input-group">
-                <span class="input-group-text">description</span>
-                <input type="text" class="form-control" aria-label="With textarea" style="height: 40px;">
+                <span class="input-group-text">Contents</span>
+                <textarea class="form-control" aria-label="With textarea" style="height: 400px;"></textarea>
             </div><br>
+
+            <!-- 파일 -->
+            <div class="mb-3">
+                <label class="form-label" for="customFile">Upload File</label>
+                <input type="file" class="form-control" id="customFile">
+            </div>
 
             <!-- 제출 -->
             <div>
-                <button type="submit" class="btn btn-primary">Next</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div><br><br><br>
         </form>
     </div>
