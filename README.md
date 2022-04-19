@@ -7,6 +7,7 @@
   - mysql v14.14
   - thymeleaf
   - spring mvc 
+  - bootstrap
 
 # 프로젝트 설명 
   - 카카오 지도 api 를 활용한 게시판 프로젝트 
