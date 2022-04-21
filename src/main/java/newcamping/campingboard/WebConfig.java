@@ -20,7 +20,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(1)
                 .addPathPatterns("/**") // 검사 대상
-                .excludePathPatterns("/", "/members/new", "/login", "/logout", "/css/**", "/*.ico","/error", "/js/*"); // 검사 제외
+                .excludePathPatterns("/", "/members/new", "/login", "/logout", "/css/**",
+                        "/*.ico","/error", "/js/*", "/notice/list/*","/notice/{id}"); // 검사 제외
     }
 
     // 필터 등록 과정

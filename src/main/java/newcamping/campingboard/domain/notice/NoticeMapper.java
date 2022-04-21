@@ -1,6 +1,5 @@
 package newcamping.campingboard.domain.notice;
 
-import newcamping.campingboard.domain.comment.CommentDTO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -19,11 +18,22 @@ public interface NoticeMapper {
     int insert(NoticeDTO notice); // insert 문은 입력된 데이터 갯수 반환, 실패시 0 return
 
     // 게시판 소속 게시물 전체 조회
-    @Select("SELECT * FROM notice WHERE notice_id=#{boardId}")
-    List<NoticeDTO> selectAll();
+    @Select("SELECT * FROM notice WHERE board_id=#{boardId}")
+    @Results(id="NoticeDTO", value={
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "boardId", column = "board_id"),
+            @Result(property = "ownerId", column = "owner_id"),
+            @Result(property = "commentCount", column = "comment_count"),
+            @Result(property = "viewCount", column = "view_count"),
+            @Result(property = "likeCount", column = "like_count"),
+            @Result(property = "unlikeCount", column = "unlike_count"),
+    })
+    List<NoticeDTO> selectAll(Long boardId);
 
     // 단일 조회
     @Select("SELECT * FROM notice WHERE id=#{noticeId}")
+    @ResultMap("NoticeDTO")
     NoticeDTO selectOne(Long noticeId);
 
     // 게시물 수정
