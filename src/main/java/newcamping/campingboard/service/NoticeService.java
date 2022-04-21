@@ -1,6 +1,7 @@
 package newcamping.campingboard.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.domain.board.BoardDTO;
 import newcamping.campingboard.domain.notice.NoticeDTO;
 import newcamping.campingboard.domain.notice.NoticeMapper;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class NoticeService {
 
@@ -41,8 +43,23 @@ public class NoticeService {
     }
 
     // 전체 조회
-    public List<NoticeDTO> findAll(){
-        return noticeMapper.selectAll();
+    public List<NoticeDTO> findAll(Long boardId){
+        List<NoticeDTO> noticeDTOS = noticeMapper.selectAll(boardId);
+        log.info("notice DTO = {}", noticeDTOS.get(1).getId());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getCreateTime());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getUpdateTime());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getBoardId());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getOwnerId());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getTitle());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getContents());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getCommentCount());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getViewCount());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getLikeCount());
+        log.info("notice DTO = {}", noticeDTOS.get(1).getUnlikeCount());
+
+
+
+        return noticeDTOS;
     }
 
     // 단일 조회

@@ -18,7 +18,7 @@ public interface BoardMapper {
 
     // 전체 조회
     @Select("SELECT * FROM board")
-    @Results(id="BoardMap", value={
+    @Results(id="BoardDTO", value={
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "updateTime", column = "update_time"),
             @Result(property = "noticeCount", column = "notice_count")

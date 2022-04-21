@@ -15,7 +15,7 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
 
     // 로그인 없이 이용할 수 있는 url
-    private static final String[] whitelist = {"/", "/members/new", "/login", "/logout", "/css/*", "/js/*"};
+    private static final String[] whitelist = {"/", "/members/new", "/login", "/logout", "/css/*", "/js/*", "/notice/list"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

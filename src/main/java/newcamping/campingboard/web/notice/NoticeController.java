@@ -1,6 +1,7 @@
 package newcamping.campingboard.web.notice;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.domain.comment.CommentDTO;
 import newcamping.campingboard.domain.notice.NoticeDTO;
 import newcamping.campingboard.service.CommentService;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/notice")
 public class NoticeController {
 
@@ -46,6 +48,16 @@ public class NoticeController {
         noticeService.save(noticeForm);
         return "redirect:/";
     }
+
+    // 게시물 전체 조회 - 게시판 id 를 통한 조회
+    @GetMapping("/list/{boardId}")
+    @ResponseBody
+    public List<NoticeDTO> findAll (@PathVariable("boardId") String boardIdString) {
+        log.info("boardId = {}", boardIdString);
+        Long boardId = Long.parseLong(boardIdString);
+        return noticeService.findAll(boardId);
+    }
+
 
     // 게시물 조회 - 상세 페이지
     @GetMapping("/{id}")
