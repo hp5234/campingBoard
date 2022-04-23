@@ -1,6 +1,7 @@
 package newcamping.campingboard.web.member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.domain.member.MemberDTO;
 import newcamping.campingboard.service.MemberService;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/members")
 public class MemberController {
 
@@ -24,8 +26,24 @@ public class MemberController {
     // 회원 가입 처리
     @PostMapping("/new")
     public String addMember(@ModelAttribute("member") MemberForm memberForm, BindingResult bindingResult) {
+        /*
+            중복검사 실시
+         */
         Long result = memberService.save(memberForm);
         return "redirect:/";
+    }
+
+    // 아이디 중복검사
+    @PostMapping("/check")
+    @ResponseBody
+    public String checkMember(@RequestBody String loginId){
+        log.info("request login={}", loginId);
+        Long check = memberService.check(loginId);
+        if (check != null ){
+            return "fail";
+        } else {
+            return "ok";
+        }
     }
 
     // 회원 수정 폼 호출

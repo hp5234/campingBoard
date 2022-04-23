@@ -3,6 +3,7 @@ package newcamping.campingboard.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.SessionConst;
+import newcamping.campingboard.session.SessionDTO;
 import org.springframework.util.PatternMatchUtils;
 
 import javax.servlet.*;
@@ -15,7 +16,8 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
 
     // 로그인 없이 이용할 수 있는 url
-    private static final String[] whitelist = {"/", "/members/new", "/login", "/logout", "/css/*", "/js/*", "/notice/list"};
+    private static final String[] whitelist = {"/", "/members/new", "/login", "/logout", "/css/*", "/js/*",
+            "/notice/list", "/notice/{id}", "/members/check"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,16 +34,19 @@ public class LoginCheckFilter implements Filter {
 
         try {
             log.info("인증 체크 필터 시작 {}", requestURI);
-            if ( isLoginCheckPath(requestURI)) {
+            if (isLoginCheckPath(requestURI)) {
                 log.info("인증 체크 로직 실행 {}", requestURI);
                 HttpSession session = httpRequest.getSession(false);
-                if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
+                SessionDTO sessionDTO = (SessionDTO) session.getAttribute(SessionConst.LOGIN_MEMBER);
+                if (session == null || sessionDTO == null) {
                     log.info("미인증 사용자 요청 {}", requestURI);
                     // 로그인으로 redirect
                     httpResponse.sendRedirect("/login?redirectURL=" + requestURI); // 로그인 후 현재 페이지로 넘어옴
                     return; // 미 인증 사용자는 이후를 진행하지 않고 끝낸다.
                     // 필터는 물론 서블릿, 컨트롤러가 더 호출되지 않고 redirect 가 응답으로 적용되고 요청이 끝난다.
                 }
+                log.info("session memberId = {}",sessionDTO.getId());
+                request.setAttribute("ownerId", sessionDTO.getId()); // 요청에 유저 id 포함
             }
             chain.doFilter(request, response);
         } catch ( Exception e) {

@@ -14,6 +14,11 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
 
+    // loginId 중복검사
+    public Long check(String loginId){
+        return memberMapper.selectCheck(loginId);
+    }
+
     // 회원가입 처리
     public Long save(MemberForm memberForm) {
         MemberDTO memberDTO = new MemberDTO();

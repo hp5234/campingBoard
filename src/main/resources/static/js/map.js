@@ -1,4 +1,6 @@
+// 카카오 맵 생성
 function mapMaker(boardList) {
+    console.log(boardList)
     // 컨트롤러에서 위치정보들 획득
     let container = document.getElementById('map');
     let options = {
@@ -18,8 +20,16 @@ function mapMaker(boardList) {
         let latitude = latlng.getLat(); // 위도 정보
         let longitude = latlng.getLng(); // 경도 정보
 
-        var resultDiv = document.getElementById('spotDisplay');
-        resultDiv.innerText = "위도 : " + latitude + "       경도 : "+ longitude;
+        // 위도 경도 출력
+        document.getElementById("spotDisplayLatitude").innerText = "위도 : " + latitude;
+        document.getElementById("spotDisplayLongitude").innerText = "경도 : " + longitude;
+
+        // 게시판 추가 버튼 보이기
+        document.getElementById("btnAddBoard").setAttribute("style", "display: block");
+
+        // 위도 경도 값 부여
+        document.getElementById("inLatitude").setAttribute("value", latitude);
+        document.getElementById("inLongitude").setAttribute("value", longitude);
     });
 
     // 지도에 마커 표기
@@ -28,16 +38,59 @@ function mapMaker(boardList) {
     }
 }
 
+// 지도에 마커 표기
+function makeMarker(map, id, latitude, longitude, boardTitle){
+
+    // 마커를 표시할 위치입니다
+    let position =  new kakao.maps.LatLng(latitude, longitude);
+
+    // 마커를 생성합니다 // id 대신 title 을 디스플레이 하도록 변경
+    let marker = new kakao.maps.Marker({
+        title: boardTitle,
+        position: position,
+        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+    });
+
+    marker.setMap(map);
+
+    // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    let iwContent = '<div><button id="boardButton' + id +'" type="button" class="markerButton" onClick={clickEvent(' + id + ',"' + boardTitle + '")}>' + boardTitle + '</button></div>',
+        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+    // 인포윈도우를 생성하고 지도에 표시합니다
+    let infowindow = new kakao.maps.InfoWindow({
+        content : iwContent,
+        removable : iwRemoveable
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커 위에 인포윈도우를 표시합니다
+        infowindow.open(map, marker);
+    });
+}
+
 // 마커 제목 클릭 이벤트
-function clickEvent(id) {
+function clickEvent(boardId, boardTitle) {
+
+    // 게시물목록에 게시판 제목 표기
+    document.getElementById("boardTitle").innerText = boardTitle;
+
+    // 게시물 추가 버튼 값 설정
+    let inBoardId = document.getElementById("inBoardId");
+    inBoardId.setAttribute("value", parseInt(boardId));
+
+    // 게시물 추가 버튼 보이기
+    document.getElementById("btnAddNotice").setAttribute("style", "text-align: right; display: block");
+
     // 기존 목록 삭제
     let noticeSpace = document.getElementById("noticeSpace");
     while (noticeSpace.hasChildNodes()) {
         noticeSpace.removeChild(noticeSpace.firstChild);
     }
 
-    //fetch
-    const url ='/notice/list/' + id;
+    // fetch
+    const url ='/notice/list/' + boardId;
     const option ={
         method:'GET'
         /*
@@ -57,7 +110,7 @@ function clickEvent(id) {
 
             response.json().then(function (noticeList){
                 for ( let i = 0; i < noticeList.length; i++ ){
-                    // Dom 생성
+                    // notice list Dom 생성
                     let newNotice = document.createElement("a");
                     newNotice.setAttribute("class", "list-group-item list-group-item-action py-3 lh-tight");
                     newNotice.setAttribute("href", "/notice/" + noticeList[i].id );
@@ -82,38 +135,3 @@ function clickEvent(id) {
             });
         })
 }
-
-// 지도에 마커 표기
-function makeMarker(map, id, latitude, longitude, boardTitle){
-
-    // 마커를 표시할 위치입니다
-    let position =  new kakao.maps.LatLng(latitude, longitude);
-
-    // 마커를 생성합니다 // id 대신 title 을 디스플레이 하도록 변경
-    let marker = new kakao.maps.Marker({
-        title: boardTitle,
-        position: position,
-        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    });
-
-    marker.setMap(map);
-
-    // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    let iwContent = '<button id="boardButton' + id +'" type="button" className="btn btn-primary" onClick={clickEvent(' + id + ')}>' + boardTitle + '</button>',
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-    // 인포윈도우를 생성하고 지도에 표시합니다
-    let infowindow = new kakao.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable
-    });
-
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커 위에 인포윈도우를 표시합니다
-        infowindow.open(map, marker);
-    });
-    document.getElementById("boardButton" + id).setAttribute("className", "btn btn-primary");
-}
-
-

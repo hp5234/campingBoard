@@ -3,6 +3,11 @@
 h1 {
     font-family: 'Comfortaa', cursive;
     color: #000069;
+    font-size:65px;
+}
+h2 {
+    font-family: 'Jua', sans-serif;
+    color: #000069;
 }
 
 #map{
@@ -36,4 +41,23 @@ h1 {
     margin-left: 5%;
     width: 70%;
     height: 100%;
+}
+.menuBar{
+    display: inline-block;
+    text-align: right;
+    width: 1000px;
+}
+#btnAddBoard {
+    font-size: 30px;
+    font-family: 'Jua', sans-serif;
+    width: 400px;
+    height: 70px;
+    color: #f0f0f0;
+    background-color: #0dcaf0
+}
+.markerButton{
+    font-family: 'Jua', sans-serif;
+    color: #f0f0f0;
+    background-color: #0dcaf0;
+    border-radius: 1rem;
 }

@@ -18,7 +18,7 @@ public class BoardController {
 
     // 게시판 추가 페이지 호출
     @PostMapping("/new/form")
-    public ModelAndView addBoardForm( @RequestParam String latitude, @RequestParam String longitude, BindingResult bindingResult ) {
+    public ModelAndView addBoardForm(@RequestParam("ownerId") String ownerId,  @RequestParam("latitude") String latitude, @RequestParam("longitude") String longitude, BindingResult bindingResult ) {
 
         ModelAndView mv = new ModelAndView();
 

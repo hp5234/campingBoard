@@ -3,6 +3,7 @@ package newcamping.campingboard;
 import newcamping.campingboard.filter.LoginCheckFilter;
 import newcamping.campingboard.interceptor.LoginCheckInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**") // 검사 대상
                 .excludePathPatterns("/", "/members/new", "/login", "/logout", "/css/**",
-                        "/*.ico","/error", "/js/*", "/notice/list/*","/notice/{id}"); // 검사 제외
+                        "/*.ico","/error", "/js/*", "/notice/list/*","/notice/{id}", "/members/check"); // 검사 제외
     }
 
     // 필터 등록 과정

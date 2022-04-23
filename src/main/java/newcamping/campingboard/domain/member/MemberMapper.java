@@ -26,6 +26,9 @@ public interface MemberMapper {
     )
     List<MemberDTO> selectAll();
 
+    @Select("SELECT id FROM member WHERE login_id=#{loginId}")
+    Long selectCheck(String loginId);
+
     // View 객체 전체 조회
     @Select("SELECT id, login_id, name, email FROM member")
     @Results(id="MemberViewDTO",
