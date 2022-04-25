@@ -3,7 +3,6 @@ package newcamping.campingboard;
 import newcamping.campingboard.filter.LoginCheckFilter;
 import newcamping.campingboard.interceptor.LoginCheckInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

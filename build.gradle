@@ -33,9 +33,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	compileOnly "org.mybatis:mybatis-typehandlers-jsr310:1.0.2"
 
-
-
-
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//JUnit4 추가
