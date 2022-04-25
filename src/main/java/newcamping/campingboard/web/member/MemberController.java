@@ -1,15 +1,22 @@
 package newcamping.campingboard.web.member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.domain.member.MemberDTO;
 import newcamping.campingboard.service.MemberService;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/members")
 public class MemberController {
 
@@ -24,8 +31,26 @@ public class MemberController {
     // 회원 가입 처리
     @PostMapping("/new")
     public String addMember(@ModelAttribute("member") MemberForm memberForm, BindingResult bindingResult) {
+        /*
+            중복검사 실시
+         */
         Long result = memberService.save(memberForm);
         return "redirect:/";
+    }
+
+    // 아이디 중복검사
+    @PostMapping(value = "/check", consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String, String> checkMember(@RequestBody Map<String, Object> json){
+        String loginId = (String) json.get("loginId");
+        Long check = memberService.check(loginId);
+        HashMap<String, String> map = new HashMap(); // response 용
+        if (check == null ){
+            map.put("result", "ok");
+        } else {
+            map.put("result", "fail");
+        }
+        return map;
     }
 
     // 회원 수정 폼 호출

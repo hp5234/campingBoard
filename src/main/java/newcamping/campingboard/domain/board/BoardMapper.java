@@ -21,6 +21,7 @@ public interface BoardMapper {
     @Results(id="BoardDTO", value={
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "ownerId", column = "owner_id"),
             @Result(property = "noticeCount", column = "notice_count")
     })
     List<BoardDTO> selectAll();

@@ -7,17 +7,19 @@
             href="css/bootstrap.min.css" rel="stylesheet">
     <link th:href="@{/css/mycss.css}"
             href="css/mycss.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/formCheck.js}"></script>
 </head>
 <body>
     <div class="bg-light">
         <br>
         <br>
-        <div class="add-memberDTO-form">
+        <div class="add-member-form">
             <h1>Sign Up Page</h1><br><br>
             <form >
                 <div class="col-md-4">
-                    <label for="validationServer01" class="form-label">User Id</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" value="User Id" required>
+                    <label for="inLoginId" class="form-label">User Id</label>
+                    <input type="text" class="form-control is-valid" id="inLoginId" value="" required>
+                    <button class="btn btn-primary" onclick="checkId()">Check Id</button>
                     <div class="valid-feedback">
                         Looks good!
                     </div>

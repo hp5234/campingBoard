@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**") // 검사 대상
                 .excludePathPatterns("/", "/members/new", "/login", "/logout", "/css/**",
-                        "/*.ico","/error", "/js/*", "/notice/list/*","/notice/{id}"); // 검사 제외
+                        "/*.ico","/error", "/js/*", "/notice/list/*","/notice/{id}", "/members/check"); // 검사 제외
     }
 
     // 필터 등록 과정
