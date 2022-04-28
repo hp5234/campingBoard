@@ -7,7 +7,7 @@ function checkId(){
     const url ='/members/check';
     const headers = new Headers();
     headers.append('Content-Type', 'application/json;utf8');
-    headers.append('Accept', 'application/json;utf8');
+    // headers.append('Accept', 'application/json;utf8');
 
     const option ={
         method:'POST',

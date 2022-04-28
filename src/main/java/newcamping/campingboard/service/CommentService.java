@@ -35,9 +35,8 @@ public class CommentService {
     }
 
     // 수정
-    public int updateComment( CommentDTO commentDTO) {
-        commentDTO.setUpdatedTime(LocalDateTime.now());
-        return commentMapper.update(commentDTO);
+    public int updateComment( Long commentId, String contents) {
+        return commentMapper.update(commentId, LocalDateTime.now(), contents);
     }
 
     // 삭제

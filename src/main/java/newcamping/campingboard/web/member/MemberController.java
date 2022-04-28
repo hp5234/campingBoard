@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import newcamping.campingboard.domain.member.MemberDTO;
 import newcamping.campingboard.service.MemberService;
-import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class MemberController {
     // 아이디 중복검사
     @PostMapping(value = "/check", consumes= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public HashMap<String, String> checkMember(@RequestBody Map<String, Object> json){
+    public ResponseEntity<Map<String, String>> checkMember(@RequestBody Map<String, Object> json){
         String loginId = (String) json.get("loginId");
         Long check = memberService.check(loginId);
         HashMap<String, String> map = new HashMap(); // response 용
@@ -50,7 +51,7 @@ public class MemberController {
         } else {
             map.put("result", "fail");
         }
-        return map;
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     // 회원 수정 폼 호출

@@ -1,6 +1,8 @@
 package newcamping.campingboard.domain.comment;
 
 import org.apache.ibatis.annotations.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -24,8 +26,8 @@ public interface CommentMapper {
     CommentDTO selectById(Long commentId);
 
     // 댓글 수정
-    @Update("UPDATE comment SET updated_time=#{comment.updatedTime}, contents=#{comment.contents} WHERE id=#{comment.commentId}")
-    int update(CommentDTO comment);
+    @Update("UPDATE comment SET updated_time=#{updatedTime}, contents=#{contents} WHERE id=#{commentId}")
+    int update(Long commentId, LocalDateTime updatedTime, String contents);
 
     // 좋아요 증가
     @Update("UPDATE comment SET like_count=like_count+1 WHERE id=#{commentId}")

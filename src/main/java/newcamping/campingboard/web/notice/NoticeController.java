@@ -32,7 +32,6 @@ public class NoticeController {
             mv.setViewName("redirect:/");
             return mv;
         }
-
         else {
             mv.setViewName("notice/addNoticeForm");
             mv.addObject("boardId", boardId);
